@@ -3,5 +3,5 @@
 # ~~~~
 
 # The websocket
-GET        /socket        com.orc.controllers.Application.socket(username: String)
+GET        /socket        com.orc.controllers.Application.socket(task: String)
 
