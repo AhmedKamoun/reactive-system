@@ -3,18 +3,13 @@ version := "1.0"
 scalaVersion := "2.12.3"
 
 lazy val commons = RootProject(file("../commons"))
-lazy val processor = (project in file(".")).enablePlugins(PlayScala).dependsOn(commons).aggregate(commons)
+lazy val processor = (project in file(".")).dependsOn(commons).aggregate(commons)
 
-// Adds additional packages into conf/routes
-// play.sbt.routes.RoutesKeys.routesImport += "com.example.binders._"
-
-// Play
+// Guice
 libraryDependencies ++= Seq(
-  guice,
-  filters,
-  ws)
+  "com.typesafe.play" %% "play-guice" % "2.6.12",
+  "com.typesafe.play" %% "play-json" % "2.6.9")
 
-libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.8"
 
 // akka dependencies
 libraryDependencies ++= Seq(

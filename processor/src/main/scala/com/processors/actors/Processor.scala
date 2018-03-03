@@ -8,7 +8,6 @@ import akka.cluster.pubsub.DistributedPubSubMediator.Publish
 import com.commons.actors.names.Topics
 import com.commons.messages.ProcessingResult
 import com.google.inject.assistedinject.Assisted
-import play.api.libs.concurrent.InjectedActorSupport
 
 object Processor {
 
@@ -23,7 +22,7 @@ object Processor {
   *
   * @param task The unique task identifier
   */
-class Processor @Inject()(@Assisted task: String) extends Actor with InjectedActorSupport with ActorLogging {
+class Processor @Inject()(@Assisted task: String) extends Actor with ActorLogging {
 
   // activate the extension
   val mediator = DistributedPubSub(context.system).mediator
