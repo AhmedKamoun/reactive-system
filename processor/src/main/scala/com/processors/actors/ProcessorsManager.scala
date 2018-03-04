@@ -20,6 +20,7 @@ class ProcessorsManager @Inject()(factory: Processor.Factory) extends Actor with
 
 
   override def preStart() = {
+    log.debug(" ProcessorsManager started")
 
     // subscribe to the topic named "ProcessorsInBox"
     mediator ! Subscribe(Topics.ProcessorsInBox, self)
@@ -29,7 +30,6 @@ class ProcessorsManager @Inject()(factory: Processor.Factory) extends Actor with
 
 
     case StartProcessor(task) =>
-      log.debug(s"receiving order of starting task $task")
 
       context.child(task) match {
         case Some(_) => {
@@ -37,7 +37,8 @@ class ProcessorsManager @Inject()(factory: Processor.Factory) extends Actor with
         }
 
         case None =>
-          log.info(s"starting of task $task")
+          log.debug(s"preparing task $task")
+
           //we will use the task as unique task for actor processor
           injectedChild(factory(task), task)
 
@@ -51,3 +52,4 @@ class ProcessorsManager @Inject()(factory: Processor.Factory) extends Actor with
 
   }
 }
+
